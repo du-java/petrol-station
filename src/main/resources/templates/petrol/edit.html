@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit / Petrol / PetrolStation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<form method="post" th:action="'/petrol/edit/'+${petrol.id}">
+    <div class="mb-3">
+        <label for="id" class="form-label">ID</label>
+        <input type="text" name="id" th:value="${petrol.id}" class="form-control" id="id" readonly/>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">name</label>
+        <input type="text" name="name" th:value="${petrol.name}" class="form-control" id="name"/>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">price</label>
+        <input type="text" name="price" th:value="${petrol.price}" class="form-control" id="price"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+</body>
+</html>
