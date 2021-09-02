@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: headFragment"/>
+<head th:replace="layout :: headerFragment"/>
+<body>
+<form method="post" action="/tank/edit">
+    <div class="mb-3">
+        <label for="id" class="form-label">quantity</label>
+        <input type="text" name="id" th:value="${tank.id}" class="form-control" id="id" readonly/>
+    </div>
+    <div class="mb-3">
+        <label for="petrol" class="form-label">petrol</label>
+        <select id="petrol" name="petrol" class="form-select">
+            <th:block th:each="petrol : ${petrols}">
+                <option th:text="${petrol.name}" th:selected="${petrol} eq ${tank.petrol}">petrol</option>
+            </th:block>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="quantity" class="form-label">quantity</label>
+        <input type="number" step="any" name="quantity" th:value="${tank.quantity}" class="form-control" id="quantity"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+<footer th:replace="./layout :: footerFragment"/>
+</body>
+</html>

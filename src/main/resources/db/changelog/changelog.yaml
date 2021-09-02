@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changesets/1630430890_create_table_station.sql
+  - include:
+      file: db/changelog/changesets/1630430899_create_table_dispenser.sql
+  - include:
+      file: db/changelog/changesets/1630431025_create_table_petrol.sql
+  - include:
+      file: db/changelog/changesets/1630431085_create_table_tank.sql
+  - include:
+      file: db/changelog/changesets/1630431191_create_table_dispenser_petrol_list.sql
+  - include:
+      file: db/changelog/changesets/1630431377_create_table_station_dispensers.sql
+  - include:
+      file: db/changelog/changesets/1630431458_create_table_station_tanks.sql
+  - include:
+      file: db/changelog/changesets/1630451123_create_table_user.sql
+  - include:
+      file: db/changelog/changesets/1630465432_create_table_user_role.sql

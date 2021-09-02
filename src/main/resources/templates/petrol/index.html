@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: headFragment"/>
+<head th:replace="layout :: headerFragment"/>
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="petrol : ${petrols}">
+        <th scope="row" th:text="${petrol.id}">1</th>
+        <td th:text="${petrol.name}">Mark</td>
+        <td th:text="${petrol.price}">Otto</td>
+        <td>
+            <a th:href="'/petrol/edit/'+${petrol.id}">Edit</a><br/><a
+                th:href="'/petrol/delete/'+${petrol.id}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/petrol/add">Add petrol</a>
+<footer th:replace="./layout :: footerFragment"/>
+</body>
+</html>
