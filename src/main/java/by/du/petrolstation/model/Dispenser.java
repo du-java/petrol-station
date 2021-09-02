@@ -18,6 +18,6 @@ public class Dispenser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Petrol> petrolList;
 }

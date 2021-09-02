@@ -1,18 +1,18 @@
 package by.du.petrolstation.controller;
 
-import by.du.petrolstation.dto.PetrolDto;
-import by.du.petrolstation.facade.PetrolFacade;
+import by.du.petrolstation.dto.TankDto;
+import by.du.petrolstation.facade.TankFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/petrol")
+@RequestMapping("/tank")
 @RequiredArgsConstructor
-public class PetrolController {
+public class TankController {
 
-    private final PetrolFacade petrolFacade;
+    private final TankFacade tankFacade;
 
     @GetMapping("/")
     public ModelAndView rootWith() {
@@ -26,50 +26,52 @@ public class PetrolController {
 
     private ModelAndView root() {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("petrol/index");
-        view.addObject("petrols", petrolFacade.findAll());
+        view.setViewName("tank/index");
+        view.addObject("tanks", tankFacade.findAll());
         return view;
     }
 
     @GetMapping("/add")
     public ModelAndView add() {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("petrol/add");
+        view.setViewName("tank/add");
+        view.addObject("petrols", tankFacade.findAllPetrols());
         return view;
     }
 
     @PostMapping("/add")
-    public ModelAndView add(@ModelAttribute PetrolDto petrolDto) {
+    public ModelAndView add(@ModelAttribute TankDto tankDto) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/petrol");
-        petrolFacade.add(petrolDto);
+        view.setViewName("redirect:/tank");
+        tankFacade.add(tankDto);
         return view;
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView editGet(@PathVariable Long id) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("petrol/edit");
+        view.setViewName("tank/edit");
 
-        view.addObject("petrol", petrolFacade.findById(id));
+        view.addObject("petrols", tankFacade.findAllPetrols());
+        view.addObject("tank", tankFacade.findById(id));
 
         return view;
     }
 
     @PostMapping("/edit")
-    public ModelAndView editPost(@ModelAttribute PetrolDto petrolDto) {
+    public ModelAndView editPost(@ModelAttribute TankDto tankDto) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/petrol");
-        petrolFacade.update(petrolDto);
+        view.setViewName("redirect:/tank");
+        tankFacade.update(tankDto);
         return view;
     }
 
     @GetMapping("/delete/{id}")
     public ModelAndView deleteGet(@PathVariable Long id) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("petrol/delete");
+        view.setViewName("tank/delete");
 
-        view.addObject("petrol", petrolFacade.findById(id));
+        view.addObject("tank", tankFacade.findById(id));
 
         return view;
     }
@@ -77,8 +79,8 @@ public class PetrolController {
     @PostMapping("/delete")
     public ModelAndView deletePost(@RequestParam("id") Long id) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/petrol");
-        petrolFacade.deleteById(id);
+        view.setViewName("redirect:/tank");
+        tankFacade.deleteById(id);
         return view;
     }
 }

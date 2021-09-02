@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Petrol Station</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: headFragment"/>
+<head th:replace="layout :: headerFragment"/>
+
 <body>
-<H2>Hello</H2>
+<a href="/station"><H2>Station</H2></a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">IDs</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Dispensers</th>
+        <th:block th:each="dispenser : ${station.dispensers}">
+            <td th:text="${dispenser.id}">Mark</td>
+        </th:block>
+    </tr>
+    <tr>
+        <th scope="row">Tanks</th>
+        <th:block th:each="tank : ${station.tanks}">
+            <td th:text="${tank.id}">Mark</td>
+        </th:block>
+    </tr>
+    </tbody>
+</table>
+<a href="/tank"><H2>Tank</H2></a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Petrol</th>
+        <th scope="col">Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tank : ${tanks}">
+        <th scope="row" th:text="${tank.id}">1</th>
+        <td th:text="${tank.petrol}">Mark</td>
+        <td th:text="${tank.quantity}">Otto</td>
+    </tr>
+    </tbody>
+</table>
+<a href="/dispenser"><H2>Dispenser</H2></a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dispenser : ${dispensers}">
+        <th scope="row" th:text="${dispenser.id}">1</th>
+        <th:block th:each="petrol : ${dispenser.petrolList}">
+            <td th:text="${petrol.name}">Mark</td>
+        </th:block>
+    </tr>
+    </tbody>
+</table>
+<a href="/petrol"><H2>Petrol</H2></a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="petrol : ${petrols}">
+        <th scope="row" th:text="${petrol.id}">1</th>
+        <td th:text="${petrol.name}">Mark</td>
+        <td th:text="${petrol.price}">Otto</td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout :: footerFragment"/>
 </body>
 </html>

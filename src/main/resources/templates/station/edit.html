@@ -4,7 +4,7 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<form method="post" action="/petrol/edit">
+<form method="post" action="/station/edit">
     <div class="mb-3">
         <label for="id" class="form-label">ID</label>
         <input type="text" name="id" th:value="${petrol.id}" class="form-control" id="id" readonly/>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">price</label>
-        <input type="number" step="any" name="price" th:value="${petrol.price}" class="form-control" id="price"/>
+        <input type="text" name="price" th:value="${petrol.price}" class="form-control" id="price"/>
     </div>
     <button type="submit" class="btn btn-primary">Edit</button>
 </form>

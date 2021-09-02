@@ -4,20 +4,20 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<form method="post" action="/petrol/edit">
+<form method="post" action="/station/delete">
     <div class="mb-3">
         <label for="id" class="form-label">ID</label>
-        <input type="text" name="id" th:value="${petrol.id}" class="form-control" id="id" readonly/>
+        <input type="text" readonly th:value="${petrol.id}" class="form-control" id="id"/>
     </div>
     <div class="mb-3">
         <label for="name" class="form-label">name</label>
-        <input type="text" name="name" th:value="${petrol.name}" class="form-control" id="name"/>
+        <input type="text" readonly th:value="${petrol.name}" class="form-control" id="name"/>
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">price</label>
-        <input type="number" step="any" name="price" th:value="${petrol.price}" class="form-control" id="price"/>
+        <input type="text" readonly th:value="${petrol.price}" class="form-control" id="price"/>
     </div>
-    <button type="submit" class="btn btn-primary">Edit</button>
+    <button type="submit" class="btn btn-primary">Delete</button>
 </form>
 <footer th:replace="./layout :: footerFragment"/>
 </body>
