@@ -17,3 +17,5 @@ databaseChangeLog:
       file: db/changelog/changesets/1630451123_create_table_user.sql
   - include:
       file: db/changelog/changesets/1630465432_create_table_user_role.sql
+  - include:
+      file: db/changelog/changesets/1630465444_insert_station.sql

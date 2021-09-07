@@ -4,7 +4,7 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<form method="post" action="/tank/add">
+<form method="post" action="/tank/add" th:object="${tankDto}">
     <div class="mb-3">
         <label for="petrol" class="form-label">petrol</label>
         <select id="petrol" name="petrol" class="form-select">
@@ -16,6 +16,8 @@
     <div class="mb-3">
         <label for="quantity" class="form-label">quantity</label>
         <input type="number" step="any" name="quantity" class="form-control" id="quantity"/>
+        <label for="quantity" class="form-label" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Name
+            Error</label>
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>

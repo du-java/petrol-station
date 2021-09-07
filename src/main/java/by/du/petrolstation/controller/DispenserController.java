@@ -1,22 +1,19 @@
 package by.du.petrolstation.controller;
 
-import by.du.petrolstation.dto.TankDto;
+import by.du.petrolstation.dto.DispenserDto;
+import by.du.petrolstation.facade.DispenserFacade;
 import by.du.petrolstation.facade.PetrolFacade;
-import by.du.petrolstation.facade.TankFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-
 @Controller
-@RequestMapping("/tank")
+@RequestMapping("/dispenser")
 @RequiredArgsConstructor
-public class TankController {
+public class DispenserController {
 
-    private final TankFacade tankFacade;
+    private final DispenserFacade dispenserFacade;
     private final PetrolFacade petrolFacade;
 
     @GetMapping("/")
@@ -31,63 +28,53 @@ public class TankController {
 
     private ModelAndView root() {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("tank/index");
-        view.addObject("tanks", tankFacade.findAll());
+        view.setViewName("dispenser/index");
+        view.addObject("dispensers", dispenserFacade.findAll());
         return view;
     }
 
     @GetMapping("/add")
     public ModelAndView add() {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("tank/add");
+        view.setViewName("dispenser/add");
         view.addObject("petrols", petrolFacade.findAll());
-        view.addObject("tankDto", TankDto.builder().build());
         return view;
     }
 
     @PostMapping("/add")
-    public ModelAndView add(@Valid @ModelAttribute TankDto tankDto, BindingResult result) {
-        if (result.hasErrors()) {
-            final ModelAndView view = new ModelAndView("tank/add");
-            view.addObject("petrols", petrolFacade.findAll());
-            return view;
-        }
+    public ModelAndView add(@ModelAttribute DispenserDto dispenserDto) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/tank");
-        tankFacade.add(tankDto);
+        view.setViewName("redirect:/dispenser");
+        dispenserFacade.add(dispenserDto);
         return view;
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView editGet(@PathVariable Long id) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("tank/edit");
+        view.setViewName("dispenser/edit");
 
         view.addObject("petrols", petrolFacade.findAll());
-        view.addObject("tankDto", tankFacade.findById(id));
+        view.addObject("dispenser", dispenserFacade.findById(id));
 
         return view;
     }
 
     @PostMapping("/edit")
-    public ModelAndView editPost(@Valid @ModelAttribute TankDto tankDto, BindingResult result) {
-        if (result.hasErrors()) {
-            final ModelAndView view = new ModelAndView("tank/edit");
-            view.addObject("petrols", petrolFacade.findAll());
-            return view;
-        }
+    public ModelAndView editPost(@ModelAttribute DispenserDto dispenserDto) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/tank");
-        tankFacade.update(tankDto);
+        view.setViewName("redirect:/dispenser");
+        dispenserFacade.update(dispenserDto);
         return view;
     }
 
     @GetMapping("/delete/{id}")
     public ModelAndView deleteGet(@PathVariable Long id) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("tank/delete");
+        view.setViewName("dispenser/delete");
 
-        view.addObject("tank", tankFacade.findById(id));
+        view.addObject("petrols", petrolFacade.findAll());
+        view.addObject("dispenser", dispenserFacade.findById(id));
 
         return view;
     }
@@ -95,8 +82,8 @@ public class TankController {
     @PostMapping("/delete")
     public ModelAndView deletePost(@RequestParam("id") Long id) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/tank");
-        tankFacade.deleteById(id);
+        view.setViewName("redirect:/dispenser");
+        dispenserFacade.deleteById(id);
         return view;
     }
 }

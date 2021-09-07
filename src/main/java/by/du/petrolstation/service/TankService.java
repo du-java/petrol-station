@@ -46,15 +46,17 @@ public class TankService {
     }
 
     public void deleteById(Long id) {
+        stationService.deleteTanks(List.of(findById(id)));
         tankRepository.deleteById(id);
     }
 
-    public Tank add(TankDto tankDto, Petrol petrol) {
+    public void add(TankDto tankDto, Petrol petrol) {
         final Tank tank = Tank.builder()
                 .petrol(petrol)
                 .quantity(tankDto.getQuantity())
                 .build();
-        return tankRepository.save(tank);
+        Tank saved = tankRepository.save(tank);
+        stationService.addTank(saved);
     }
 
     public void deleteAll(List<Tank> tanks) {

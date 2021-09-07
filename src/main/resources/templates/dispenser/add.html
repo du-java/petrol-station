@@ -6,12 +6,12 @@
 <body>
 <form method="post" action="/dispenser/add">
     <div class="mb-3">
-        <label for="name" class="form-label">name</label>
-        <input type="text" name="name" class="form-control" id="name"/>
-    </div>
-    <div class="mb-3">
-        <label for="price" class="form-label">price</label>
-        <input type="text" name="price" class="form-control" id="price"/>
+        <label for="petrol" class="form-select" >petrol</label>
+        <select id="petrol" name="petrols" class="form-select" multiple>
+            <th:block th:each="petrol : ${petrols}">
+                <option th:text="${petrol.name}">petrol</option>
+            </th:block>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>

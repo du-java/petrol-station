@@ -1,5 +1,6 @@
 package by.du.petrolstation.service;
 
+import by.du.petrolstation.dto.DispenserDto;
 import by.du.petrolstation.model.Dispenser;
 import by.du.petrolstation.model.Petrol;
 import by.du.petrolstation.repository.DispenserRepository;
@@ -16,9 +17,14 @@ import java.util.stream.Collectors;
 public class DispenserService {
 
     private final DispenserRepository dispenserRepository;
+    private final StationService stationService;
+    private final DispenserDispenserDtoConverter dispenserDispenserDtoConverter;
+    private final DispenserDtoDispenserConverter dispenserDtoDispenserConverter;
 
-    public List<Dispenser> findAll() {
-        return dispenserRepository.findAll();
+    public List<DispenserDto> findAll() {
+        return dispenserRepository.findAll().stream()
+                .map(dispenserDispenserDtoConverter::convert)
+                .collect(Collectors.toList());
     }
 
     public Dispenser findById(Long id) {
@@ -26,11 +32,13 @@ public class DispenserService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public Dispenser update(Dispenser dispenser) {
-        return dispenserRepository.save(dispenser);
+    public void update(DispenserDto dto) {
+        final Dispenser dispenser = dispenserDtoDispenserConverter.convert(dto);
+        dispenserRepository.save(dispenser);
     }
 
     public void deleteById(Long id) {
+        stationService.deleteByDispenser(findById(id));
         dispenserRepository.deleteById(id);
     }
 
@@ -40,5 +48,14 @@ public class DispenserService {
                 .collect(Collectors.toList());
 
         dispenserRepository.saveAll(dispensers);
+    }
+
+    public void add(DispenserDto dispenserDto) {
+        final Dispenser saved = dispenserRepository.save(dispenserDtoDispenserConverter.convert(dispenserDto));
+        stationService.addDispenser(saved);
+    }
+
+    public DispenserDto findByIdDto(Long id) {
+        return dispenserDispenserDtoConverter.convert(findById(id));
     }
 }
