@@ -14,8 +14,8 @@
     <tbody>
     <tr th:each="dispenser : ${dispensers}">
         <th scope="row" th:text="${dispenser.id}">1</th>
-        <th:block th:each="petrol : ${dispenser.petrolList}">
-            <td th:text="${petrol.name}">Mark</td>
+        <th:block th:each="petrol : ${dispenser.petrols}">
+            <td th:text="${petrol}">Mark</td>
         </th:block>
         <td>
             <a th:href="'/dispenser/edit/'+${dispenser.id}">Edit</a><br/><a

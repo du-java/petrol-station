@@ -4,8 +4,11 @@ import by.du.petrolstation.dto.PetrolDto;
 import by.du.petrolstation.facade.PetrolFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/petrol")
@@ -39,7 +42,7 @@ public class PetrolController {
     }
 
     @PostMapping("/add")
-    public ModelAndView add(@ModelAttribute PetrolDto petrolDto) {
+    public ModelAndView add(@Valid @ModelAttribute PetrolDto petrolDto) {
         final ModelAndView view = new ModelAndView();
         view.setViewName("redirect:/petrol");
         petrolFacade.add(petrolDto);
@@ -57,7 +60,7 @@ public class PetrolController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView editPost(@ModelAttribute PetrolDto petrolDto) {
+    public ModelAndView editPost(@Valid @ModelAttribute PetrolDto petrolDto) {
         final ModelAndView view = new ModelAndView();
         view.setViewName("redirect:/petrol");
         petrolFacade.update(petrolDto);

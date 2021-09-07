@@ -1,5 +1,6 @@
 package by.du.petrolstation.service;
 
+import by.du.petrolstation.model.Dispenser;
 import by.du.petrolstation.model.Station;
 import by.du.petrolstation.model.Tank;
 import by.du.petrolstation.repository.StationRepository;
@@ -46,6 +47,18 @@ public class StationService {
     public void addTank(Tank tank) {
         final Station station = find();
         station.getTanks().add(tank);
+        stationRepository.save(station);
+    }
+
+    public void addDispenser(Dispenser dispenser) {
+        final Station station = find();
+        station.getDispensers().add(dispenser);
+        stationRepository.save(station);
+    }
+
+    public void deleteByDispenser(Dispenser dispenser) {
+        Station station = find();
+        station.getDispensers().remove(dispenser);
         stationRepository.save(station);
     }
 }

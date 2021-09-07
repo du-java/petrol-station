@@ -2,6 +2,8 @@ package by.du.petrolstation.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Data
@@ -10,6 +12,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class TankDto {
     private Long id;
+    @NotBlank(message = "Petrol is mandatory")
     private String petrol;
+    @Positive(message = "Quantity should be positive")
     private BigDecimal quantity;
 }
