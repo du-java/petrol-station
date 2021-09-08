@@ -23,13 +23,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/tank">Tanks</a>
+                        <a class="nav-link" href="#" th:href="@{/station}">Station</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dispenser">Dispensers</a>
+                        <a class="nav-link" href="#" th:href="@{/tank}">Tanks</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/petrol">Petrol</a>
+                        <a class="nav-link" href="#" th:href="@{/dispenser}">Dispensers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{/petrol}">Petrol</a>
                     </li>
                 </ul>
             </div>
@@ -40,9 +43,7 @@
 <body>
 
 <footer th:fragment="footerFragment">
-    <div class="container-fluid">
-        &copy; domain.com
-        </a> </div>
+    <div class="container-fluid">&copy; domain.com</div>
 </footer>
 
 </body>

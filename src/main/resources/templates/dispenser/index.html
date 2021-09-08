@@ -4,27 +4,29 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="dispenser : ${dispensers}">
-        <th scope="row" th:text="${dispenser.id}">1</th>
-        <th:block th:each="petrol : ${dispenser.petrols}">
-            <td th:text="${petrol}">Mark</td>
-        </th:block>
-        <td>
-            <a th:href="'/dispenser/edit/'+${dispenser.id}">Edit</a><br/><a
-                th:href="'/dispenser/delete/'+${dispenser.id}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/dispenser/add">Add dispenser</a>
-<footer th:replace="./layout :: footerFragment"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dispenser : ${dispensers}">
+            <th scope="row" th:text="${dispenser.id}">1</th>
+            <th:block th:each="petrol : ${dispenser.petrols}">
+                <td th:text="${petrol}">Mark</td>
+            </th:block>
+            <td>
+                <a href="#" th:href="@{/dispenser/edit/{id}(id=${dispenser.id})}">Edit</a><br/>
+                <a href="#" th:href="@{/dispenser/delete/{id}(id=${dispenser.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="#" th:href="@{/dispenser/add}">Add dispenser</a>
+</div>
+<footer th:replace="layout :: footerFragment"/>
 </body>
 </html>

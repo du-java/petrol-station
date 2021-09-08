@@ -4,21 +4,24 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<form method="post" action="/tank/delete">
-    <div class="mb-3">
-        <label for="id" class="form-label">quantity</label>
-        <input type="text" name="id" th:value="${tank.id}" class="form-control" id="id" readonly/>
-    </div>
-    <div class="mb-3">
-        <label for="petrol" class="form-label">quantity</label>
-        <input type="text" name="petrol" th:value="${tank.petrol}" class="form-control" id="petrol" readonly/>
-    </div>
-    <div class="mb-3">
-        <label for="quantity" class="form-label">quantity</label>
-        <input type="number" name="quantity" th:value="${tank.quantity}" class="form-control" id="quantity" readonly/>
-    </div>
-    <button type="submit" class="btn btn-primary">Delete</button>
-</form>
-<footer th:replace="./layout :: footerFragment"/>
+<div class="container">
+    <form method="post" action="#" th:action="@{/tank/delete}">
+        <div class="mb-3">
+            <label for="id" class="form-label">quantity</label>
+            <input type="text" name="id" th:value="${tank.id}" class="form-control" id="id" readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="petrol" class="form-label">quantity</label>
+            <input type="text" name="petrol" th:value="${tank.petrol}" class="form-control" id="petrol" readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">quantity</label>
+            <input type="number" name="quantity" th:value="${tank.quantity}" class="form-control" id="quantity"
+                   readonly/>
+        </div>
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+</div>
+<footer th:replace="layout :: footerFragment"/>
 </body>
 </html>

@@ -4,27 +4,29 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Petrol</th>
-        <th scope="col">Quantity</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="tank : ${tanks}">
-        <th scope="row" th:text="${tank.id}">1</th>
-        <td th:text="${tank.petrol}">Mark</td>
-        <td th:text="${tank.quantity}">Otto</td>
-        <td>
-            <a th:href="'/tank/edit/'+${tank.id}">Edit</a><br/><a
-                th:href="'/tank/delete/'+${tank.id}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/tank/add">Add tank</a>
-<footer th:replace="./layout :: footerFragment"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Petrol</th>
+            <th scope="col">Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tank : ${tanks}">
+            <th scope="row" th:text="${tank.id}">1</th>
+            <td th:text="${tank.petrol}">Mark</td>
+            <td th:text="${tank.quantity}">Otto</td>
+            <td>
+                <a href="#" th:href="@{/tank/edit/{id}(id=${tank.id})}">Edit</a><br/>
+                <a href="#" th:href="@{/tank/delete/{id}(id=${tank.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="#" th:href="@{/tank/add}">Add tank</a>
+</div>
+<footer th:replace="layout :: footerFragment"/>
 </body>
 </html>

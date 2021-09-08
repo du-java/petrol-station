@@ -38,11 +38,15 @@ public class PetrolController {
     public ModelAndView add() {
         final ModelAndView view = new ModelAndView();
         view.setViewName("petrol/add");
+        view.addObject("petrolDto", PetrolDto.builder().build());
         return view;
     }
 
     @PostMapping("/add")
-    public ModelAndView add(@Valid @ModelAttribute PetrolDto petrolDto) {
+    public ModelAndView add(@Valid @ModelAttribute PetrolDto petrolDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ModelAndView("petrol/add");
+        }
         final ModelAndView view = new ModelAndView();
         view.setViewName("redirect:/petrol");
         petrolFacade.add(petrolDto);
@@ -54,13 +58,16 @@ public class PetrolController {
         final ModelAndView view = new ModelAndView();
         view.setViewName("petrol/edit");
 
-        view.addObject("petrol", petrolFacade.findById(id));
+        view.addObject("petrolDto", petrolFacade.findById(id));
 
         return view;
     }
 
     @PostMapping("/edit")
-    public ModelAndView editPost(@Valid @ModelAttribute PetrolDto petrolDto) {
+    public ModelAndView editPost(@Valid @ModelAttribute PetrolDto petrolDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ModelAndView("petrol/edit");
+        }
         final ModelAndView view = new ModelAndView();
         view.setViewName("redirect:/petrol");
         petrolFacade.update(petrolDto);

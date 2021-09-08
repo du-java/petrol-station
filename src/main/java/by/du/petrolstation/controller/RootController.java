@@ -16,10 +16,6 @@ public class RootController {
     public ModelAndView root() {
         final ModelAndView view = new ModelAndView();
         view.setViewName("index");
-        view.addObject("dispensers", rootFacade.findAllDispenser());
-        view.addObject("tanks", rootFacade.findAllTank());
-        view.addObject("petrols", rootFacade.findAllPetrol());
-        view.addObject("station", rootFacade.find());
         return view;
     }
 }

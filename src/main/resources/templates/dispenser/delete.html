@@ -4,22 +4,25 @@
 <head th:replace="layout :: headFragment"/>
 <head th:replace="layout :: headerFragment"/>
 <body>
-<form method="post" action="/dispenser/delete">
-    <div class="mb-3">
-        <label for="id" class="form-label">quantity</label>
-        <input type="text" name="id" th:value="${dispenser.id}" class="form-control" id="id" readonly/>
-    </div>
-    <div class="mb-3">
-        <label for="petrol" class="form-label">petrol</label>
-        <select id="petrol" name="petrols" class="form-select" multiple disabled>
-            <th:block th:each="petrol : ${petrols}">
-                <option th:text="${petrol.name}" th:selected="${#lists.contains(dispenser.petrols, petrol.name)}">petrol
-                </option>
-            </th:block>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Delete</button>
-</form>
-<footer th:replace="./layout :: footerFragment"/>
+<div class="container">
+    <form method="post" action="#" th:action="@{/dispenser/delete}">
+        <div class="mb-3">
+            <label for="id" class="form-label">quantity</label>
+            <input type="text" name="id" th:value="${dispenser.id}" class="form-control" id="id" readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="petrol" class="form-label">petrol</label>
+            <select id="petrol" name="petrols" class="form-select" multiple disabled>
+                <th:block th:each="petrol : ${dispenser.petrols}">
+                    <option th:text="${petrol}">
+                        petrol
+                    </option>
+                </th:block>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+</div>
+<footer th:replace="layout :: footerFragment"/>
 </body>
 </html>
