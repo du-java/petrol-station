@@ -20,6 +20,6 @@ public class Order {
 
     private BigDecimal amount;
     private Integer count;
-    @ManyToMany
+    @OneToOne
     private Petrol petrol;
 }
