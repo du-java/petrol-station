@@ -22,3 +22,15 @@ spring:
     url: jdbc:mysql://localhost:3306/${db-schema-name}
     username: root
     password: 1234
+
+
+integration:
+  base-url: https://www.nbrb.by
+  path: /api/exrates/rates/
+  currencies:
+    - currency: USD
+      id: 431
+    - currency: EUR
+      id: 451
+    - currency: RUR
+      id: 456
