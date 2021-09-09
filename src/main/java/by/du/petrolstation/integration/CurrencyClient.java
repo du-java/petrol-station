@@ -5,6 +5,8 @@ import by.du.petrolstation.properties.CurrencyProperties;
 import by.du.petrolstation.properties.PetrolCurrency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -25,23 +27,27 @@ public class CurrencyClient {
     private final Map<Currency, CurrencyResponse> currencyMap;
 
     public CurrencyResponse getRate(PetrolCurrency petrolCurrency) {
+
         final String url = UriComponentsBuilder
                 .fromUriString(currencyProperties.getBaseUrl())
                 .path(currencyProperties.getPath())
                 .path(String.valueOf(petrolCurrency.getId()))
                 .toUriString();
+
         final Currency currency = Currency.getInstance(petrolCurrency.getCurrency().toUpperCase());
+
         try {
             final ResponseEntity<CurrencyResponse> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
-                    null,
+                    new HttpEntity<>(new HttpHeaders()), // new HttpEntity<>(body, httpHeaders),
                     CurrencyResponse.class
             );
 
             final CurrencyResponse currencyResponse = response.getBody();
             currencyMap.put(currency, currencyResponse);
             return currencyResponse;
+
         } catch (RestClientException ex) {
             log.error("{}", ex.getMessage());
             return currencyMap.getOrDefault(
