@@ -21,6 +21,9 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String password;
+
     @ElementCollection(targetClass = Role.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_role")
