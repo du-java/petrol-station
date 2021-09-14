@@ -49,6 +49,8 @@
                     <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
                         <li class="nav-item">
                             <a class="nav-link" href="#" th:href="@{/login}">Login</a>
+                        </li>  <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/singup}">singUp</a>
                         </li>
                     </th:block>
                 </ul>

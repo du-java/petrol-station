@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/currency/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").anonymous()
+                .antMatchers("/singup/**").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
