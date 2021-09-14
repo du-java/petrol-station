@@ -17,35 +17,31 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/singup")
 public class SingUpController {
+
     private final SingUpService singUpService;
 
     @GetMapping
     public ModelAndView showRegistrationForm() {
-
         ModelAndView view = new ModelAndView("singup/index");
-        view.addObject("userDto",SingUpUserDto.builder().build());
+        view.addObject("singUpUserDto", SingUpUserDto.builder().build());
         return view;
-
     }
 
     @PostMapping
-    public ModelAndView createUser(@Valid @ModelAttribute SingUpUserDto userDto, BindingResult result) {
+    public ModelAndView createUser(@Valid @ModelAttribute SingUpUserDto singUpUserDto, BindingResult result) {
         if (result.hasErrors()) {
             ModelAndView view = new ModelAndView("singup/index");
-            view.addObject("userDto",userDto);
-
+            view.addObject("singUpUserDto", singUpUserDto);
             return view;
         }
         try {
-            singUpService.createUser(userDto);
+            singUpService.createUser(singUpUserDto);
+            return new ModelAndView("redirect:/login");
         } catch (IllegalArgumentException ex) {
             ModelAndView view = new ModelAndView("singup/index");
             view.addObject("errors", ex.getMessage());
-            view.addObject("userDto",userDto);
-
+            view.addObject("singUpUserDto", singUpUserDto);
             return view;
         }
-        return new ModelAndView("redirect:/login");
     }
-
 }

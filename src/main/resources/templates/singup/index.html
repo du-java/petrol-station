@@ -5,29 +5,31 @@
 <head th:replace="layout :: headerFragment"/>
 <body>
 <div class="container">
-    <form th:action="@{/singup}" th:object="${userDto}" method="post" class="row g-3">
+    <form th:action="@{/singup}" th:object="${singUpUserDto}" method="post">
         <div class="mb-3">
-            <label for="staticEmail2" class="form-label">name</label>
-            <input th:value="${userDto.name}" type="text"  class="form-control" id="staticEmail2" name="name"/>
-            <label for="staticEmail2" class="form-label" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+            <label for="name" class="form-label">name</label>
+            <input th:value="${singUpUserDto.name}" type="text" class="form-control" id="name" placeholder="Name"
+                   name="name"/>
+            <label for="name" class="form-label" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
                 Error</label>
-
         </div>
         <div class="mb-3">
-            <label for="inputPassword1" class="form-label">Password</label>
-            <input th:value="${userDto.password}" type="password" class="form-control" id="inputPassword1" placeholder="Password" name="password">
-            <label for="inputPassword1" class="form-label" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name
-            </label>
+            <label for="password" class="form-label">Password</label>
+            <input th:value="${singUpUserDto.password}" type="password" class="form-control" id="password"
+                   placeholder="Password" name="password">
+            <label for="password" class="form-label" th:if="${#fields.hasErrors('password')}"
+                   th:errors="*{password}">Name </label>
         </div>
         <div class="mb-3">
-            <label for="inputPassword2" class="form-label">repeat Password</label>
-            <input type="password" class="form-control" id="inputPassword2" placeholder="confirmation" name="confirmation">
-            <label for="inputPassword2" class="form-label" th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}">Name
-            </label>
+            <label for="confirmation" class="form-label">repeat Password</label>
+            <input type="password" class="form-control" id="confirmation" placeholder="confirmation"
+                   name="confirmation">
+            <label for="confirmation" class="form-label" th:if="${#fields.hasErrors('confirmation')}"
+                   th:errors="*{confirmation}">Name </label>
         </div>
-        <label  class="form-label" th:if="${errors!=null}" th:text="${errors}">Name
+        <label class="form-label" th:if="${errors!=null}" th:text="${errors}">Name
         </label>
-            <div class="mb-3">
+        <div class="mb-3">
             <button type="submit" class="btn btn-primary mb-3">create user</button>
         </div>
     </form>
