@@ -23,3 +23,9 @@ databaseChangeLog:
       file: db/changelog/changesets/1631140578_create_table_order.sql
   - include:
       file: db/changelog/changesets/1631140600_alter_table_user.sql
+  - include:
+      file: db/changelog/changesets/1631814709_alter_table_order.sql
+  - include:
+      file: db/changelog/changesets/1631815100_alter_table_petrol.sql
+  - include:
+      file: db/changelog/changesets/1631815156_alter_table_user.sql

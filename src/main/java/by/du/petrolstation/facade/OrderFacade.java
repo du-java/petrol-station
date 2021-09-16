@@ -54,7 +54,7 @@ public class OrderFacade {
 
     public void add(OrderDto orderDto) {
         Order order = Order.builder()
-                .count(orderDto.getQuantity())
+                .quantity(orderDto.getQuantity())
                 .petrol(petrolService.findByName(orderDto.getPetrol()))
                 .amount(orderDto.getAmount())
                 .build();

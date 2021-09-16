@@ -19,7 +19,9 @@ public class Order {
     private Long id;
 
     private BigDecimal amount;
-    private BigDecimal count;
+    private BigDecimal quantity;
     @OneToOne
     private Petrol petrol;
+    @OneToOne
+    private User user;
 }
