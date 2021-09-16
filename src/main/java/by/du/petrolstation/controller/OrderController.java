@@ -54,7 +54,11 @@ public class OrderController {
 
     @PostMapping("/")
     @PreAuthorize("hasRole('ROLE_CLIENT')")
-    public ModelAndView order(@RequestParam(defaultValue = "0") BigDecimal quantity, @RequestParam(defaultValue = "0") BigDecimal amount, @RequestParam String petrol) {
+    public ModelAndView order(
+            @RequestParam(defaultValue = "0") BigDecimal quantity,
+            @RequestParam(defaultValue = "0") BigDecimal amount,
+            @RequestParam String petrol
+    ) {
         ModelAndView view = new ModelAndView("order/view");
         if (quantity.equals(BigDecimal.ZERO)) {
             view.addObject("order", orderFacade.getOrderByAmount(amount, petrol));
