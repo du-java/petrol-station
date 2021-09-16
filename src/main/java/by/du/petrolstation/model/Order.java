@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Builder
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
