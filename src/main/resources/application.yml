@@ -2,7 +2,7 @@ db-schema-name: petrol_db
 
 spring:
   liquibase:
-    enabled: true
+    enabled: false
     change-log: db/changelog/changelog.yaml
     default-schema: ${db-schema-name}
 
@@ -19,9 +19,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/${db-schema-name}
+    url: jdbc:mysql://localhost:3306/petrol_db
     username: root
-    password: 1234
+    password: pass
 
 
 integration:

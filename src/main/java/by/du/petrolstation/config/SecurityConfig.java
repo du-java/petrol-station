@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/tank/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/petrol/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                 .antMatchers("/currency/**").permitAll()
+                .antMatchers("/order/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").anonymous()
                 .antMatchers("/singup/**").anonymous()

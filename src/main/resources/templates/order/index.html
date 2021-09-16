@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: headFragment"/>
+<head th:replace="layout :: headerFragment"/>
+<body>
+<div class="container">
+    <form th:action="@{/order/}" method="get">
+    <select id="dispenser" name="dispenserId" class="form-select" >
+        <th:block th:each="dispenser : ${dispensers}">
+            <option th:text="${dispenser.id}">petrol</option>
+        </th:block>
+    </select>
+        <input type="submit" value="select"/>
+    </form>
+</div>
+<th:block th:if="${petrols!=null}">
+<div class="container">
+    <form th:action="@{/order/}" method="post">
+        <div class="mb-3">
+        <select id="petrol" name="petrol" class="form-select" >
+        <th:block th:each="petrol : ${petrols}">
+            <option th:text="${petrol}">petrol</option>
+        </th:block>
+    </select>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">quantity</label>
+            <input type="number" name="quantity"  class="form-control" id="quantity"/>
+
+        </div>   <div class="mb-3">
+            <label for="amount" class="form-label">amount</label>
+            <input type="number" name="amount"  class="form-control" id="amount"/>
+
+        </div>
+        <input type="submit" value="order"/>
+    </form>
+</div>
+</th:block>
+<footer th:replace="layout :: footerFragment"/>
+</body>
+</html>
