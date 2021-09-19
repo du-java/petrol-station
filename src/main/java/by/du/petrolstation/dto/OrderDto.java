@@ -1,5 +1,6 @@
 package by.du.petrolstation.dto;
 
+import by.du.petrolstation.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class OrderDto {
     private String petrol;
     private BigDecimal price;
     private LocalDateTime date;
+    private User user;
 }

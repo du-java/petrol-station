@@ -35,7 +35,7 @@ public class OrderController {
     }
 
     @GetMapping("/add")
-    @PreAuthorize("hasRole('ROLE_CLIENT')")
+   // @PreAuthorize("hasRole('ROLE_CLIENT')")
     public ModelAndView showDispensers() {
         ModelAndView view = new ModelAndView("order/add");
         view.addObject("dispensers", orderFacade.getAllDispensers());
@@ -74,5 +74,21 @@ public class OrderController {
     public ModelAndView pay(@ModelAttribute OrderDto orderDto, Authentication authentication) {
         orderFacade.add(orderDto, authentication);
         return new ModelAndView("redirect:/order");
+    }
+    @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    public ModelAndView deleteGet(@PathVariable Long id) {
+        final ModelAndView view = new ModelAndView();
+        view.setViewName("order/delete");
+        view.addObject("order", orderFacade.findById(id));
+        return view;
+    }
+    @PostMapping("/delete")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    public ModelAndView deletePost(@RequestParam("id") Long id) {
+        final ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:/order");
+        orderFacade.deleteById(id);
+        return view;
     }
 }

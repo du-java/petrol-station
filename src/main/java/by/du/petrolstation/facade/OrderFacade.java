@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,6 +76,7 @@ public class OrderFacade {
     private User getUser(Authentication authentication) {
         return userRepository.findByName(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("user not found"));
+
     }
 
     private OrderDto convert(Order order) {
@@ -84,6 +86,7 @@ public class OrderFacade {
                 .amount(order.getAmount())
                 .quantity(order.getQuantity())
                 .price(order.getPetrol().getPrice())
+                .user(order.getUser())
                 .build();
     }
 
@@ -91,5 +94,14 @@ public class OrderFacade {
         return orderRepository.findAll().stream()
                 .map(this::convert)
                 .collect(Collectors.toList());
+    }
+
+    public OrderDto findById(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("order not found"));
+        return convert(order);
+    }
+
+    public void deleteById(Long id) {
+        orderRepository.deleteById(id);
     }
 }
