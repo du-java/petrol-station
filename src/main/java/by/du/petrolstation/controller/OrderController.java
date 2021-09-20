@@ -3,6 +3,7 @@ package by.du.petrolstation.controller;
 import by.du.petrolstation.dto.DispenserDto;
 import by.du.petrolstation.dto.OrderDto;
 import by.du.petrolstation.facade.OrderFacade;
+import by.du.petrolstation.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 @RequestMapping("/order")
 public class OrderController {
     private final OrderFacade orderFacade;
+    private final UserFacade userFacade;
 
     @GetMapping("/list")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
@@ -26,7 +28,7 @@ public class OrderController {
         return view;
     }
 
-    @GetMapping
+    @GetMapping()
     @PreAuthorize("hasRole('ROLE_CLIENT')")
     public ModelAndView list(Authentication authentication) {
         final ModelAndView view = new ModelAndView("order/index");
@@ -35,7 +37,7 @@ public class OrderController {
     }
 
     @GetMapping("/add")
-   // @PreAuthorize("hasRole('ROLE_CLIENT')")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     public ModelAndView showDispensers() {
         ModelAndView view = new ModelAndView("order/add");
         view.addObject("dispensers", orderFacade.getAllDispensers());
@@ -75,20 +77,25 @@ public class OrderController {
         orderFacade.add(orderDto, authentication);
         return new ModelAndView("redirect:/order");
     }
+
     @GetMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public ModelAndView deleteGet(@PathVariable Long id) {
         final ModelAndView view = new ModelAndView();
         view.setViewName("order/delete");
         view.addObject("order", orderFacade.findById(id));
         return view;
     }
+
     @PostMapping("/delete")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-    public ModelAndView deletePost(@RequestParam("id") Long id) {
+    public ModelAndView deletePost(@RequestParam("id") Long id, Authentication authentication) {
         final ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/order");
         orderFacade.deleteById(id);
+        if (userFacade.isClient(authentication)) {
+            view.setViewName("redirect:");
+        } else {
+            view.setViewName("redirect:list");
+        }
         return view;
+
     }
 }

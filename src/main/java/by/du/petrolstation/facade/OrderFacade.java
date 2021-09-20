@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,7 +72,7 @@ public class OrderFacade {
                 .collect(Collectors.toList());
     }
 
-    private User getUser(Authentication authentication) {
+    public User getUser(Authentication authentication) {
         return userRepository.findByName(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("user not found"));
 

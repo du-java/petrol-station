@@ -12,6 +12,7 @@
             <th scope="col">Petrol</th>
             <th scope="col">Quantity</th>
             <th scope="col">Amount</th>
+            <th scope="col">Client</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <td th:text="${order.petrol}">Mark</td>
                 <td th:text="${order.quantity}">Mark</td>
                 <td th:text="${order.amount}">Mark</td>
+                <td th:text="${order.user.name}">Mark</td>
             <td>
                 <a href="#" th:href="@{/order/edit/{id}(id=${order.id})}">Edit</a><br/>
                 <a href="#" th:href="@{/order/delete/{id}(id=${order.id})}">Delete</a>
