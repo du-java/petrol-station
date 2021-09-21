@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -45,9 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/dispenser/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/tank/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/petrol/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                .antMatchers("/order/**").authenticated()
                 .antMatchers("/currency/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").anonymous()
+                .antMatchers("/singup/**").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -19,9 +19,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/${db-schema-name}
+    url: jdbc:mysql://localhost:3306/petrol_db
     username: root
-    password: 1234
+    password: pass
 
 
 integration:

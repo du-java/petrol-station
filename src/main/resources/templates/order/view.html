@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: headFragment"/>
+<head th:replace="layout :: headerFragment"/>
+<body>
+
+<div class="container">
+    <form th:action="@{/order/pay}" method="post">
+        <div class="mb-3">
+            <label for="petrol" class="form-label">petrol</label>
+            <input type="text" name="petrol" class="form-control" id="petrol" th:value="${order.petrol}"readonly/>
+
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">price</label>
+            <input type="text" name="price" class="form-control" id="price" th:value="${order.price}"readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">quantity</label>
+            <input type="text" name="quantity" class="form-control" id="quantity"th:value="${order.quantity}"readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">amount</label>
+            <input type="text" name="amount" class="form-control" id="amount"th:value="${order.amount}"readonly/>
+        </div>
+        <input type="submit" value="pay"/>
+    </form>
+</div>
+<footer th:replace="layout :: footerFragment"/>
+</body>
+</html>

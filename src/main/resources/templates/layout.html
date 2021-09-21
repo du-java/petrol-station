@@ -41,6 +41,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" th:href="@{/currency}">Currency</a>
                     </li>
+                    <th:block th:if="${#authorization.expression('hasRole(''CLIENT'')')}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/order}">Order</a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${#authorization.expression('hasRole(''MANAGER'')')}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/order/list}">Order</a>
+                        </li>
+                    </th:block>
                     <th:block th:if="${#authorization.expression('isAuthenticated()')}">
                         <li class="nav-item">
                             <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
@@ -49,6 +59,8 @@
                     <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
                         <li class="nav-item">
                             <a class="nav-link" href="#" th:href="@{/login}">Login</a>
+                        </li>  <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/singup}">singUp</a>
                         </li>
                     </th:block>
                 </ul>

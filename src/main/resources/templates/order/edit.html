@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: headFragment"/>
+<head th:replace="layout :: headerFragment"/>
+<body>
+<div class="container">
+    <form method="post" action="#" th:action="@{/order/edit}" th:object="${order}">
+        <div class="mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" name="id" th:value="${order.id}" class="form-control" id="id" readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">quantity</label>
+            <input type="text" name="quantity" th:value="${order.quantity}" class="form-control" id="quantity"/>
+            <label for="quantity" class="form-label" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Name
+                Error</label>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">amount</label>
+            <input type="number" step="any" name="amount" readonly th:value="${order.amount}" class="form-control" id="amount"/>
+            <label for="amount" class="form-label" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name
+                Error</label>
+        </div>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input type="text" readonly th:value="${order.user.name}" class="form-control" id="Name"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+</div>
+<footer th:replace="layout :: footerFragment"/>
+</body>
+</html>

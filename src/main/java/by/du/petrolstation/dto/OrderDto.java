@@ -1,28 +1,24 @@
-package by.du.petrolstation.model;
+package by.du.petrolstation.dto;
 
+import by.du.petrolstation.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
-@Entity
 @Builder
-@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderDto {
     private Long id;
-
     private BigDecimal amount;
     private BigDecimal quantity;
-    @OneToOne
-    private Petrol petrol;
-    @OneToOne
+    private String petrol;
+    private BigDecimal price;
+    private LocalDateTime date;
     private User user;
 }
