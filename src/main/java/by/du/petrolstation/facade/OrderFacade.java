@@ -83,7 +83,6 @@ public class OrderFacade {
     public User getUser(Authentication authentication) {
         return userRepository.findByName(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("user not found"));
-
     }
 
     private OrderDto convert(Order order) {
@@ -93,7 +92,7 @@ public class OrderFacade {
                 .amount(order.getAmount())
                 .quantity(order.getQuantity())
                 .price(order.getPetrol().getPrice())
-                .user(order.getUser())
+                .user(order.getUser().getName())
                 .build();
     }
 

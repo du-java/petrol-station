@@ -16,16 +16,12 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 //@RequiredArgsConstructor
-
 public class TankService {
-   @Autowired
-   private   TankRepository tankRepository;
-    @Autowired
 
-    private  StationService stationService;
     @Autowired
-
-    private  TankService tankService;
+    private TankRepository tankRepository;
+    @Autowired
+    private StationService stationService;
 
     public void deleteByPetrol(Petrol petrol) {
         // remove tanks from station
@@ -34,8 +30,9 @@ public class TankService {
 
         deleteAll(tanks);
     }
-    public BigDecimal getQuantityPetrol(Petrol petrol){
-        Tank tank = tankService.findByPetrol(petrol);
+
+    public BigDecimal getQuantityPetrol(Petrol petrol) {
+        Tank tank = findByPetrol(petrol);
         return tank.getQuantity();
     }
 
@@ -79,7 +76,8 @@ public class TankService {
     public List<Tank> findAllByPetrol(Petrol petrol) {
         return tankRepository.findAllByPetrol(petrol);
     }
-    public  Tank findByPetrol(Petrol petrol){
+
+    public Tank findByPetrol(Petrol petrol) {
         return tankRepository.findByPetrol(petrol);
     }
 

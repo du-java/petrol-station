@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PetrolDto {
+public class PetrolDto implements Dto {
     private Long id;
     @NotBlank(message = "Name is mandatory")
     @Size(min = 3, max = 10, message = "Name's size is from 3 to 10")

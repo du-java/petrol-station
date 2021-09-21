@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DispenserDto {
+public class DispenserDto implements Dto{
     private Long id;
     @NotNull
     private List<String> petrols;

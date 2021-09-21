@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Order implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

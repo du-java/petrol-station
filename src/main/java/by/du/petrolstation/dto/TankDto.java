@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TankDto {
+public class TankDto implements Dto {
     private Long id;
     @NotBlank(message = "Petrol is mandatory")
     private String petrol;
