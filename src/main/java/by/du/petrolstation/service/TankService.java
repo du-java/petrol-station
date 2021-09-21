@@ -5,19 +5,27 @@ import by.du.petrolstation.model.Petrol;
 import by.du.petrolstation.model.Tank;
 import by.du.petrolstation.repository.TankRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
-public class TankService {
+//@RequiredArgsConstructor
 
-    private final TankRepository tankRepository;
-    private final StationService stationService;
+public class TankService {
+   @Autowired
+   private   TankRepository tankRepository;
+    @Autowired
+
+    private  StationService stationService;
+    @Autowired
+
+    private  TankService tankService;
 
     public void deleteByPetrol(Petrol petrol) {
         // remove tanks from station
@@ -26,6 +34,11 @@ public class TankService {
 
         deleteAll(tanks);
     }
+    public BigDecimal getQuantityPetrol(Petrol petrol){
+        Tank tank = tankService.findByPetrol(petrol);
+        return tank.getQuantity();
+    }
+
 
     public List<TankDto> findAll() {
         return tankRepository.findAll().stream()
@@ -66,8 +79,11 @@ public class TankService {
     public List<Tank> findAllByPetrol(Petrol petrol) {
         return tankRepository.findAllByPetrol(petrol);
     }
+    public  Tank findByPetrol(Petrol petrol){
+        return tankRepository.findByPetrol(petrol);
+    }
 
-    private TankDto converter(Tank tank) {
+    public TankDto converter(Tank tank) {
         return TankDto.builder()
                 .id(tank.getId())
                 .petrol(tank.getPetrol().getName())

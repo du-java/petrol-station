@@ -9,6 +9,7 @@ import by.du.petrolstation.repository.OrderRepository;
 import by.du.petrolstation.repository.UserRepository;
 import by.du.petrolstation.service.DispenserService;
 import by.du.petrolstation.service.PetrolService;
+import by.du.petrolstation.service.TankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,12 @@ public class OrderFacade {
     private final PetrolService petrolService;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final TankFacade tankFacade;
+    private final TankService tankService;
+
+    public Boolean checkOrder(OrderDto orderDto) {
+        return tankService.getQuantityPetrol(petrolService.findByName(orderDto.getPetrol())).subtract(orderDto.getQuantity()).signum() > 0;
+    }
 
     public List<DispenserDto> getAllDispensers() {
         return dispenserService.findAll();
@@ -64,6 +71,7 @@ public class OrderFacade {
                 .user(getUser(authentication))
                 .build();
         orderRepository.save(order);
+        tankFacade.soldPetrol(order);
     }
 
     public List<OrderDto> findAll(Authentication authentication) {
@@ -96,11 +104,22 @@ public class OrderFacade {
     }
 
     public OrderDto findById(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("order not found"));
+        Order order = getOrder(id);
         return convert(order);
+    }
+
+    private Order getOrder(Long id) {
+        return orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("order not found"));
     }
 
     public void deleteById(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    public void updateOrder(OrderDto orderDto) {
+        Order order = getOrder(orderDto.getId());
+        order.setAmount(orderDto.getAmount());
+        order.setQuantity(orderDto.getQuantity());
+        orderRepository.save(order);
     }
 }

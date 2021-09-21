@@ -36,7 +36,11 @@
         <input type="submit" value="order"/>
     </form>
 </div>
+
 </th:block>
+
+<div th:if="${errMsg!=null}" th:text="${errMsg}"></div>
+
 <footer th:replace="layout :: footerFragment"/>
 </body>
 </html>
